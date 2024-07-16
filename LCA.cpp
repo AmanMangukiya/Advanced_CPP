@@ -1,5 +1,5 @@
 void Binary_Lifting(ll node,ll parent,vector<ll> adj[],vector<vector<ll>> &up,vector<ll> &depth,ll d){
- 
+ //d=0;
   up[node][0]=parent;
 
   for(int i=1;i<21;i++){
