@@ -5,8 +5,8 @@
 
 
 struct node{
-    ll a;
-    ll d;
+    ll a;               // a== first term of ap
+    ll d;               // a== diffrence
     ll sum;
      node(){
         a=0;
