@@ -20,7 +20,7 @@ void push(int i,int s,int e){
             // if there is lazy,apply and push down.
 
             // lazy apply code
-            g[i].sum += (e-s+1)*1LL*(g[i].lazy);
+            g[i].sum += (e-s+1)*1LL*(g[i].lazy);    //  this is for adding some value  for l tor type query
 
             // push down
 
@@ -49,7 +49,7 @@ void push(int i,int s,int e){
 
  }
 
- void update(int i,int s,int e,int l,int r,ll val){  // range update
+ void update(int i,int s,int e,int l,int r,ll val){  // range update  heare this is for addine val for l to r
 
      push(i,s,e);       // ----> O(1)
 
