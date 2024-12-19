@@ -21,6 +21,7 @@ void push(int i,int s,int e){
 
             // lazy apply code
             g[i].sum += (e-s+1)*1LL*(g[i].lazy);    //  this is for adding some value  for l tor type query
+                                                     // if l to r change  array value to val then insted of += we have only =
 
             // push down
 
@@ -55,7 +56,7 @@ void push(int i,int s,int e){
 
      if(s > r || e < l) return;
      if(s>=l && e<=r){
-           g[i].lazy+=val;
+           g[i].lazy+=val;                 // if l to r change  array value to val then insted of += we have only =
            push(i,s,e);
            return;
      } 
