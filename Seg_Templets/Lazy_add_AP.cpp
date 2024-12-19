@@ -1,7 +1,7 @@
-Your task is to maintain an array of n values and efficiently process the following types of queries:
+//Your task is to maintain an array of n values and efficiently process the following types of queries:
 
-Increase the first value in range [a,b] by 1, the second value by 2, the third value by 3, and so on.
-Calculate the sum of values in range [a,b].
+//Increase the first value in range [a,b] by 1, the second value by 2, the third value by 3, and so on.
+//Calculate the sum of values in range [a,b].
 
 
 struct node{
