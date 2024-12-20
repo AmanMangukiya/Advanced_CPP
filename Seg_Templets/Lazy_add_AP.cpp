@@ -24,8 +24,8 @@ node merge(node a,node b){
 
 
 void push_down(int cur,int child,ll a,ll d){
-    g[child].a+=g[cur].a;
-    g[child].d+=g[cur].d;
+    g[child].a+=a;
+    g[child].d+=d;
 }
 
 
