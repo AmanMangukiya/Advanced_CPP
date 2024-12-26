@@ -29,6 +29,7 @@ int bit[N];
 */
 
 void update(int i, int x){ 
+	// if i take N=> size of the array the this loop should be go for equal to N
 	for(; i < N; i += (i&-i))             // (x&-x)  gives us right most but
     bit[i] += x;                                     /*   x= 12 ->1100 
                                               x&-x == 100 -> 4
