@@ -1,4 +1,6 @@
 
+// https://cses.fi/problemset/task/1734/
+
 ll block =600;
 
 ll mp[200005];
