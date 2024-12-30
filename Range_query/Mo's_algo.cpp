@@ -1,60 +1,133 @@
-// Mo's Algorithm
-const ll BLOCK_SIZE = 500; // sqrt(n) or some near value
 
-// TODO: Data structures for Mo's algo
+ll block =600;
 
-// TODO: remove value at idx from data structure
-void remove(ll idx){
-
-};
-
-// TODO: add value at idx from data structure
-void add(ll idx){
-
-};
-
-// TODO: extract the current answer of the data structure
-ll get_answer(){
-
-}; 
-
-// l, r -> 0 based indexing
-struct Query { 
-    ll l, r, idx;
-    bool operator<(Query other) const
+ll mp[200005];
+struct box{
+	ll idx,l,r;
+    bool operator<(const box &other) const
     {
-        return make_pair(l / BLOCK_SIZE, r) <
-               make_pair(other.l / BLOCK_SIZE, other.r);
+        int block_a = l / block, block_b = other.l / block;
+        if (block_a != block_b)
+            return block_a < block_b;
+        return (block_a & 1) ? (r > other.r) : (r < other.r);
     }
+	
 };
 
-vector<ll> mo_s_algorithm(vector<Query> queries) {
-    vector<ll> answers(queries.size());
-    sort(queries.begin(), queries.end());
+void add(int &index,ll &ans,ll &val){
+	  
+	  if(!mp[val]){
+		 ans++;
+		 mp[val]++;
+	  }else{
+		 mp[val]++;
+	  }
+}
 
-    // TODO: initialize data structure
 
-    ll cur_l = 0;
-    ll cur_r = -1;
-    // invariant: data structure will always reflect the range [cur_l, cur_r]
-    for (Query q : queries) {
-        while (cur_l > q.l) {
-            cur_l--;
-            add(cur_l);
-        }
-        while (cur_r < q.r) {
-            cur_r++;
-            add(cur_r);
-        }
-        while (cur_l < q.l) {
-            remove(cur_l);
-            cur_l++;
-        }
-        while (cur_r > q.r) {
-            remove(cur_r);
-            cur_r--;
-        }
-        answers[q.idx] = get_answer();
-    }
-    return answers;
+void remove(int &index,ll &ans,ll &val){
+
+	  if(mp[val]==1){
+		  ans--;
+		  mp[val]--;
+	  }else{
+		 mp[val]--;
+	  }
+}
+
+
+
+vector<ll>mos(vector<box>&query,vector<ll>&v){
+
+	 sort(all(query));
+
+	 vector<ll>x(query.size());
+
+	 int cul=0,cur=-1;
+
+      ll ans=0;
+
+	 for(auto it:query){
+          
+		  int l=it.l;
+		  int r=it.r;
+
+		  while(r > cur){
+			  cur++;
+			  add(cur,ans,v[cur]);
+		  }
+
+
+		  while(cul > l){
+			  cul--;
+			  add(cul,ans,v[cul]);
+		  }
+
+
+		  while(cur > r){
+			  remove(cur,ans,v[cur]);
+			  cur--;
+		  }
+
+
+		  while(cul < l){
+			 remove(cul,ans,v[cul]);
+			 cul++;
+		  }
+
+          x[it.idx]=ans;
+	 }
+
+
+	 return x;
+
+}
+void solve(){   
+  
+    ll n,q;
+	cin>>n>>q;
+
+	//block=sqrtl(n)+1;
+
+
+    vector<ll>v(n);
+	
+
+   unordered_map<ll,ll> coordinateCompress;
+   int compressed_Num = 1;
+ 
+   for(int i = 0; i < n; i++)
+   {
+       cin >> v[i];
+       if(coordinateCompress.find(v[i]) != coordinateCompress.end()){
+        v[i] = coordinateCompress[v[i]];
+       }
+       else{
+        coordinateCompress[v[i]] = compressed_Num;
+        v[i] = compressed_Num++;
+       }
+   }
+vector<box>query(q);
+
+	for(int i=0;i<q;i++){
+
+		ll l,r;
+		cin>>l>>r;
+		l--,r--;
+
+		query[i].l=l;
+        query[i].r=r;
+		query[i].idx=i;
+		
+
+	}
+
+
+
+	vector<ll>ans=mos(query,v);
+	
+	for(auto it:ans){
+		cout<<it<<endl;
+	}
+
 }
