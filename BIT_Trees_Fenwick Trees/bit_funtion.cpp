@@ -43,6 +43,29 @@ int sum(int i){
 	return ans;
 }
 
-int main(){
-	
+
+class fenwick{
+     public:
+     vector<ll>bit;
+     ll N;
+       fenwick(ll n){
+          bit.resize(n+1,0);
+          N=n+1;
+       }
+
+void update(ll i, ll x){ 
+	// if i take N=> size of the array the this loop should be go for equal to N
+	for(; i < N; i += (i&-i))             // (x&-x)  gives us right most but
+    bit[i] += x;                                     /*   x= 12 ->1100 
+                                              x&-x == 100 -> 4
+                                         */
 }
+
+ll sum(ll i){
+	ll ans = 0;
+	for(; i > 0; i -= (i&-i))   // each itretion removing right most bit add to answer and jumo to onother range 
+		ans += bit[i];
+	return ans;
+}
+
+};
